@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="./css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+
+<body>
+    <p class='response' id="error"></p>
+    <form class="signup-form" >
+        <h1 class="sign-in-header">Sign up</h1>
+        
+        <div class="content content-register">
+            <div class="inputs-container">
+                
+                <div class="input-container">
+                    <input type="text" name="name" id="name" class="client-input" placeholder="Enter your name">
+                    <label for="name">Name</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="email" id="email" class="client-input"
+                        placeholder="Enter your email address">
+                    <label for="email">Email address</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="password" id="password" class="client-input"
+                        placeholder="Enter your password">
+                    <label for="passwordInput">Password</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="gender" id="gender" class="client-input"
+                        placeholder="Enter your gender">
+                    <label for="gender">Gender</label>
+                </div>
+                <div class="input-container">
+                    <input type="text" name="interested" id="interested" class="client-input"
+                        placeholder="Enter your interested">
+                    <label for="interested">Interested IN : Male/Female</label>
+                </div>
+                <h2 id="response" class="response opacity">.</h2>
+            </div>
+            <button type="submit" id="SignUp" class="form-submit">Sign up</button>
+            <p class="old-account">Alreaady have an account? <a class="register" href="login.html">Sign in</a></p>
+        </div>
+       </form> 
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="page_scripts.js"></script>
+    <script>
+        workshop_pages.loadFor("signup");
+    </script>
+
+</body>
+
+</html>
