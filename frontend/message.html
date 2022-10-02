@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dating Match</title>
+    <link rel="stylesheet" href="./css/landing.css" />
+    
+  </head>
+  <body>
+    
+    <div class="hero container">
+      
+      <nav class="top-nav">
+        <h1 class="title">Dating Match</h1>
+        <ul class="links">
+         <a href="./landingpage.html"><li>Home</li></a>
+         <a href="./profile.html"><li>Profile</li></a>
+       </ul>
+      </nav>
+
+      <section class="hero-content">
+        <span class="hero-heading">Dating Match</span>
+        <span class="hero-paragraph">
+           Make Friends & Meet New People
+        </span>
+      </section>
+      
+    </div>
+
+    <section class="container users">
+      <p class='response' id="msg-sent"></p>
+      <div class="users-flex mobile">     
+        
+          <div class="card-container">
+            <div class="inputs-container">
+                <div class="input-container">
+                    <label for="name">Message:</label>
+                    <input type="text" name="message" id="msg" class="client-input" placeholder="Enter your message">    
+                </div>
+              <button id="send" class="primary">
+                Send
+              </button>
+            </div>
+          </div>
+
+          <div id="sent" class="card-container">
+            <h1>Messages Sent</h1><br>
+
+          </div>
+
+          <div id="recieved" class="card-container">
+            <h1>Recieved Messages</h1><br>
+
+          </div>
+        
+      </div>
+    </section>
+
+    <div class="footer">
+        <p>Copyright © Dating Match 2022</p>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="page_scripts.js"></script>
+    <script>
+        workshop_pages.loadFor("message");
+    </script>
+    
+  </body>
+</html>
