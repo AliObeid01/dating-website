@@ -92,7 +92,19 @@ class landingController extends Controller
         $id = Auth::id();
         $user = user::find($id);
         return $user->favoriteBy()->get();
-    }   
+    }
+
+    //blockUser Function to block a user
+    public function blockUser(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        $user->blocks()->attach($request->block_id);
+
+        return response()->json([
+            "status" => "Success",
+            "data" => "user has been blocked"
+        ]);
+    }
 
 
 
