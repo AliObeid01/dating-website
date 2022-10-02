@@ -6,9 +6,10 @@ use App\Http\Controllers\landingController;
 
 Route::group(["prefix"=> "v1"], function(){
 
+    Route::group(['middleware' => 'auth:api'], function () {
 
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
     Route::get("/not_found", [LandingController::class, "notFound"])->name("not-found");
-    
+
 });
