@@ -9,7 +9,9 @@ use Validator;
 
 class landingController extends Controller
 {
-
-
+    //userProfile Function return the user information
+    public function userProfile() {
+        return response()->json(auth()->user());
+    }
 
 }
