@@ -68,4 +68,16 @@ class AuthController extends Controller
         ]);
     }
 
+    //getlocation function to get the location of the register user
+    //return the current location
+    public function getlocation(){
+
+        $user_ip = getenv('REMOTE_ADDR');
+        $geo = unserialize(file_get_contents("http://www.geoplugin.net/php.gp?ip=$user_ip"));
+        $location = $geo["geoplugin_countryName"].','.$geo["geoplugin_city"];
+
+        return $location;
+
+    }
+
 }
