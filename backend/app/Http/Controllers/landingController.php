@@ -56,4 +56,17 @@ class landingController extends Controller
 
     }
 
+    //favoriteUser Function to favorite a user
+    public function favoriteUser(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        $user->favorites()->attach($request->favorite_id);
+
+        return response()->json([
+            "status" => "Success",
+            "data" => "user has been favorite"
+        ]);
+    }
+
+
 }
