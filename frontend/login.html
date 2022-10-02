@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./css/signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+
+<body>
+    
+    <form>
+        <p class='response' id="error"></p>
+        <h1 class="sign-in-header">login</h1>
+        <div class="content">
+            <div class="inputs-container">
+                <div class="input-container">
+                    <input type="text" name="email" id="email" class="client-input"
+                        placeholder="Enter your email">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-container">
+                    <input type="password" name="password" id="password" class="client-input"
+                        placeholder="Enter your password">
+                    <label for="passwordInput">Password</label>
+                </div>
+                <h2 id="response" class="response opacity">.</h2>
+            </div>
+            <button type="submit" id="login" class="form-submit">login <i class="fa-solid fa-right-to-bracket"></i></button>
+        </div>
+        <p class="new-account">Don't have an account? <a class="register" href="./signup.html">Register</a></p>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
+    <script src="page_scripts.js"></script>
+    <script>
+        workshop_pages.loadFor("login");
+    </script>
+    </body>
+    
+    </html>
