@@ -80,5 +80,12 @@ class landingController extends Controller
         ]);
     }
 
+    //getfavorites Function to get the favorites of a user
+    public function getfavorites(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->favorites()->get();
+    }
+
 
 }
