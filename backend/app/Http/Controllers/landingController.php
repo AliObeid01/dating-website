@@ -68,5 +68,17 @@ class landingController extends Controller
         ]);
     }
 
+    //UnfavoriteUser Function to unfavorite a user
+    public function UnfavoriteUser(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        $user->favorites()->detach($request->favorite_id);
+
+        return response()->json([
+            "status" => "Success",
+            "data" => "user has been Unfavorite"
+        ]);
+    }
+
 
 }
