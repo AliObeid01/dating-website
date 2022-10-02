@@ -87,5 +87,13 @@ class landingController extends Controller
         return $user->favorites()->get();
     }
 
+    //getfavorites Function to get the favoriteby users
+    public function getFavoriteBy(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->favoriteBy()->get();
+    }   
+
+
 
 }
