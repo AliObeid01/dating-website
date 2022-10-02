@@ -29,4 +29,31 @@ class landingController extends Controller
        ]);
     }
 
+    //updateProfile Function to update user profile
+    public function updateProfile(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        $user->name = $request->name;
+        $user->interested = $request->interested;
+        $user->bio = $request->bio;
+        $user->dob = $request->dob;
+        $user->invisible = $request->invisible;
+        $url=$id.'.'.$request->profile_pic->extension();
+        $request->profile_pic->move(public_path('images'),$url);
+        $user->profile_pic=$url;
+
+        if($user->save()){
+           return response()->json([
+             "status" => "Success",
+             "message" => "Profile updated"
+           ]);
+        }
+
+       return response()->json([
+          "status" => "Error",
+          "data" => "Error editing profile"
+        ]);
+
+    }
+
 }
