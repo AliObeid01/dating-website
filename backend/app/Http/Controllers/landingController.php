@@ -106,6 +106,18 @@ class landingController extends Controller
         ]);
     }
 
+    //sendMessage Function to send a message to a user
+    public function sendMessage(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        $user->chatSend()->attach($request->reciever,array('message' => $request->message));
+
+        return response()->json([
+            "status" => "Success",
+            "data" => "Message has been sent"
+        ]);
+    }
+    
 
 
 }
