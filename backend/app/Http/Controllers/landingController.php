@@ -132,5 +132,12 @@ class landingController extends Controller
         return $user->chatReciever()->get(array('message'));
     }
 
+    //notFound Function to route the user when unauthorized
+    function notFound(){
+        return response()->json([
+            "status" => "Error",
+            "data" => "Not Found"
+        ]);
+    }
 
 }
