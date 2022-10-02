@@ -14,4 +14,19 @@ class landingController extends Controller
         return response()->json(auth()->user());
     }
 
+    //userfeed Function return all the users on a specific condition
+    public function userFeed() {
+        $id = Auth::id();
+        $users= user::
+        where('gender',Auth::user()->interested)
+        ->where('id', '!=', $id)
+        ->where('invisible', '=', 0)
+        ->get();
+
+       return response()->json([
+          "status" => "Success",
+          "data" => $users
+       ]);
+    }
+
 }
