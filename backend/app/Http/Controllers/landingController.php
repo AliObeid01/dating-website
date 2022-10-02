@@ -122,9 +122,15 @@ class landingController extends Controller
     public function getSentMessages(Request $request) {
         $id = Auth::id();
         $user = user::find($id);
-        return $user->chatSend()->get(array('message'));
-         
-        
+        return $user->chatSend()->get(array('message')); 
     }
+
+    //getRecievedMessages Function to get the recieved messages
+    public function getRecievedMessages(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->chatReciever()->get(array('message'));
+    }
+
 
 }
