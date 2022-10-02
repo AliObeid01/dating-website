@@ -117,7 +117,14 @@ class landingController extends Controller
             "data" => "Message has been sent"
         ]);
     }
-    
 
+    //getSentMessages Function to get the sented messages
+    public function getSentMessages(Request $request) {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->chatSend()->get(array('message'));
+         
+        
+    }
 
 }
