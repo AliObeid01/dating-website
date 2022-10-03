@@ -108,3 +108,19 @@ workshop_pages.getAPI_user = async (api_url,token) => {
         workshop_pages.Console("Error from GET API",  error);
     }
 }
+
+//fetch favorite a user api
+workshop_pages.postAPI_favorite = async (api_url,api_data,token) => {
+    try{
+        return await axios.post(
+            api_url,
+            api_data,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        )
+    }catch(error){
+        workshop_pages.Console("Error from favorite API",  error);
+    }
+}
