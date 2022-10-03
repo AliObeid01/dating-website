@@ -27,3 +27,18 @@ workshop_pages.postAPI_login = async (api_url, api_data) => {
         validate.innerHTML= error.response.data.message;
     }
 }
+
+//fetch the register api
+workshop_pages.postAPI_Register = async (api_url, api_data) => {
+    const validate=document.getElementById('error');
+    try{
+        return await axios.post(
+            api_url,
+            api_data
+        ).then(function (){
+          window.location.href = "login.html";
+        });  
+    }catch(error){
+        validate.innerHTML= JSON.stringify(error.response.data);
+    }
+}
