@@ -42,3 +42,42 @@ workshop_pages.postAPI_Register = async (api_url, api_data) => {
         validate.innerHTML= JSON.stringify(error.response.data);
     }
 }
+
+//fetch the feed api
+workshop_pages.getAPI_feed = async (api_url,token) => {
+    try{
+        return await axios.get(
+            api_url,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+        let user=document.getElementById('user');
+        for (let i = 0; i < response.data.data.length; i++) {
+            user.innerHTML+=`<div id="${response.data.data[i].id}" class="card-container">
+            <img id="img" class="round" src=""/>
+            <h3 id="name">${response.data.data[i].name}</h3>
+            <h4 id="email">${response.data.data[i].email}</h4>
+            <h4 id="gender">gender: ${response.data.data[i].gender}</h4>
+            <h4 id="interested">Interested in: ${response.data.data[i].interested}</h4>
+            <h4 id="location">Adress: ${response.data.data[i].location}</h4>
+            <h4 id="bio">Bio: ${response.data.data[i].bio}</h4> <br/> <h4 id="dob">Date of Birth:${response.data.data[i].dob}</h4>
+            <div class="buttons">
+               <button id="msg" class="primary" onclick="location.href='message.html?id=${response.data.data[i].id}';">
+                Message
+              </button>
+              <button  class="primary ghost" onclick=workshop_pages.favorite(${response.data.data[i].id})>
+               Favorite
+              </button>
+              <button  class="primary ghost" onclick=workshop_pages.block(${response.data.data[i].id})>
+               Block
+             </button>
+            </div>
+          </div>`
+        }
+        });
+    }catch(error){
+        workshop_pages.Console("Error from GET API",  error);
+    }
+}
