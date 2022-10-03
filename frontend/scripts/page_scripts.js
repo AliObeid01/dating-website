@@ -124,3 +124,26 @@ workshop_pages.postAPI_favorite = async (api_url,api_data,token) => {
         workshop_pages.Console("Error from favorite API",  error);
     }
 }
+
+//fetch get favorites api
+workshop_pages.getAPI_favorites = async () => {
+    let token = localStorage.getItem("token");
+    const favorites_url = `${workshop_pages.baseURL}/favorites`;
+    try{
+        return await axios.get(
+            favorites_url,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+        let favorites=document.getElementById('favorites');
+        for (let i = 0; i < response.data.length; i++) {
+           favorites.innerHTML+=`
+           <p>${response.data[i].name}--location:${response.data[i].location}<p>`
+        }
+        });
+    }catch(error){
+        workshop_pages.Console("Error from GET API",  error);
+    }
+}
