@@ -81,3 +81,30 @@ workshop_pages.getAPI_feed = async (api_url,token) => {
         workshop_pages.Console("Error from GET API",  error);
     }
 }
+
+//fetch the user information api
+workshop_pages.getAPI_user = async (api_url,token) => {
+    try{
+        return await axios.get(
+            api_url,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+        let userProfile=document.getElementById('user');
+        userProfile.innerHTML=`
+             <h1>Profile</h1><br>
+            <img id="img" class="round" src=""/>
+            <h3 id="name">${response.data.name}</h3>
+            <h4 id="email">${response.data.email}</h4>
+            <h4 id="gender">gender: ${response.data.gender}</h4>
+            <h4 id="interested">Interested in: ${response.data.interested}</h4>
+            <h4 id="location">Adress: ${response.data.location}</h4>
+            <h4 id="bio">Bio: ${response.data.bio}</h4> <br/> <h4 id="dob">Date of Birth:${response.data.dob}</h4>
+          `
+        });
+    }catch(error){
+        workshop_pages.Console("Error from GET API",  error);
+    }
+}
