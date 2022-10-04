@@ -277,3 +277,13 @@ workshop_pages.UpdateProfile = async (api_data) => {
     const response_update = workshop_pages.postAPI_Update(register_url,api_data,token);
     workshop_pages.Console("Testing Update API", response_update);   
 }
+
+workshop_pages.favorite = async (favorite_id) => {
+    let card=document.getElementById(favorite_id)
+    let token = localStorage.getItem("token");
+    const favorite_url = `${workshop_pages.baseURL}/favorite-user`;
+    const api_data={favorite_id:favorite_id};
+    const response_favorite = workshop_pages.postAPI_favorite(favorite_url,api_data,token);
+    workshop_pages.Console("Testing favorite API", response_favorite);
+    card.remove();
+}
