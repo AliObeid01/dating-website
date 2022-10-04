@@ -147,3 +147,26 @@ workshop_pages.getAPI_favorites = async () => {
         workshop_pages.Console("Error from GET API",  error);
     }
 }
+
+//fetch get favoriteby api
+workshop_pages.getAPI_favoriteBy = async () => {
+    let token = localStorage.getItem("token");
+    const favorites_url = `${workshop_pages.baseURL}/favoriteby`;
+    try{
+        return await axios.get(
+            favorites_url,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+        let favoritby=document.getElementById('favoritby');
+        for (let i = 0; i < response.data.length; i++) {
+            favoritby.innerHTML+=`
+            <p>${response.data[i].name}--location:${response.data[i].location}<p>`
+        }
+        });
+    }catch(error){
+        workshop_pages.Console("Error from GET API",  error);
+    }
+}
