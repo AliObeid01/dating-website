@@ -170,3 +170,26 @@ workshop_pages.getAPI_favoriteBy = async () => {
         workshop_pages.Console("Error from GET API",  error);
     }
 }
+
+//fetch get sented messages api
+workshop_pages.getAPI_MessagesSent = async () => {
+    let token = localStorage.getItem("token");
+    const Sent_url = `${workshop_pages.baseURL}/user-SendMessages`;
+    try{
+        return await axios.get(
+            Sent_url,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+        let sent=document.getElementById('sent');
+        for (let i = 0; i < response.data.length; i++) {
+            sent.innerHTML+=`
+           <p>${response.data[i].message}<p>`
+        }
+        });
+    }catch(error){
+        workshop_pages.Console("Error from GET API",  error);
+    }
+}
