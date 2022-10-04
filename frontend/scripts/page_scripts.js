@@ -302,7 +302,7 @@ workshop_pages.loadFor = (page) => {
     eval("workshop_pages.load_" + page + "();");
 }
 
-//load signup script
+//load signup page script
 workshop_pages.load_signup = async () => {
     const name=document.getElementById('name');
     const email=document.getElementById('email');
@@ -316,6 +316,21 @@ workshop_pages.load_signup = async () => {
     const api_data={name:name.value,email:email.value,password:password.value,gender:gender.value,interested:interested.value};
     const response_register = workshop_pages.postAPI_Register(register_url,api_data);
     workshop_pages.Console("Testing Register API", response_register.data);
+    
+    });
+}
+
+//load login page script
+workshop_pages.load_login = async () => {
+    const email=document.getElementById('email');
+    const password=document.getElementById('password');
+    const login=document.getElementById('login');
+    login.addEventListener("click", (e) => {
+    e.preventDefault();
+    const login_url = `${workshop_pages.baseURL}/login`;
+    const api_data={email:email.value,password:password.value};
+    const response_login = workshop_pages.postAPI_login(login_url,api_data);
+    workshop_pages.Console("Testing login API", response_login.data);
     
     });
 }
