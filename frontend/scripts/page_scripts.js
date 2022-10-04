@@ -58,7 +58,7 @@ workshop_pages.getAPI_feed = async (api_url,token) => {
         let user=document.getElementById('user');
         for (let i = 0; i < response.data.data.length; i++) {
             user.innerHTML+=`<div id="${response.data.data[i].id}" class="card-container">
-            <img id="img" class="round" src=""/>
+            <img id="img" class="round" src="http://127.0.0.1:8000/images/${response.data.data[i].profile_pic}"/>
             <h3 id="name">${response.data.data[i].name}</h3>
             <h4 id="email">${response.data.data[i].email}</h4>
             <h4 id="gender">gender: ${response.data.data[i].gender}</h4>
@@ -97,7 +97,7 @@ workshop_pages.getAPI_user = async (api_url,token) => {
         let userProfile=document.getElementById('user');
         userProfile.innerHTML=`
              <h1>Profile</h1><br>
-            <img id="img" class="round" src=""/>
+            <img id="img" class="round" src="http://127.0.0.1:8000/images/${response.data.profile_pic}"/>
             <h3 id="name">${response.data.name}</h3>
             <h4 id="email">${response.data.email}</h4>
             <h4 id="gender">gender: ${response.data.gender}</h4>
@@ -121,7 +121,7 @@ workshop_pages.postAPI_favorite = async (api_url,api_data,token) => {
                      "Authorization" : "Bearer " + token
                 }
             }
-        )
+        ).then(function (){location.reload()});
     }catch(error){
         workshop_pages.Console("Error from favorite API",  error);
     }
@@ -188,7 +188,7 @@ workshop_pages.getAPI_MessagesSent = async () => {
         let sent=document.getElementById('sent');
         for (let i = 0; i < response.data.length; i++) {
             sent.innerHTML+=`
-           <p>${response.data[i].message}<p>`
+           <p>${response.data[i].name}:${response.data[i].message}<p>`
         }
         });
     }catch(error){
@@ -211,7 +211,7 @@ workshop_pages.getAPI_MessagesRecieved = async () => {
         let recieved=document.getElementById('recieved');
         for (let i = 0; i < response.data.length; i++) {
             recieved.innerHTML+=`
-            <p>${response.data[i].message}<p>`
+            <p>${response.data[i].name}:${response.data[i].message}<p>`
         }
         });
     }catch(error){
@@ -228,16 +228,16 @@ workshop_pages.postAPI_block= async (api_url,api_data,token) => {
             { headers:{
                      "Authorization" : "Bearer " + token
                 }
-            }
-        )
+            },
+        ).then(function (){location.reload()});
     }catch(error){
         workshop_pages.Console("Error from Block API",  error);
     }
+    
 }
 
 //fetch message a user api
 workshop_pages.postAPI_message = async (api_url,api_data,token) => {
-    const msg=document.getElementById('msg-sent');
     try{
         return await axios.post(
             api_url,
@@ -246,9 +246,7 @@ workshop_pages.postAPI_message = async (api_url,api_data,token) => {
                      "Authorization" : "Bearer " + token
                 }
             }
-        ).then(function (response){
-            msg.innerHTML=response.data.data;    
-        });
+        ).then(function (){location.reload()});
     }catch(error){
         workshop_pages.Console("Error from Message API",  error);
     }
@@ -256,18 +254,16 @@ workshop_pages.postAPI_message = async (api_url,api_data,token) => {
 
 //fetch update user information api
 workshop_pages.postAPI_Update = async (api_url,api_data,token) => {
-    const msg=document.getElementById('updatemsg');
     try{
         return await axios.post(
             api_url,
             api_data,
             { headers:{
-                     "Authorization" : "Bearer " + token
+                     "Authorization" : "Bearer " + token,
+                     "contentType": 'multipart/form-data'
                 }
             }
-        ).then(function (response){
-            msg.innerHTML=response.data.message; 
-        });
+        ).then(function (){location.reload()});
     }catch(error){
         workshop_pages.Console("Error from Update API",  error);
     }
@@ -280,24 +276,20 @@ workshop_pages.UpdateProfile = async (api_data) => {
     workshop_pages.Console("Testing Update API", response_update);   
 }
 
-workshop_pages.favorite = async (favorite_id) => {
-    let card=document.getElementById(favorite_id)
+workshop_pages.favorite = async (favorite_id) => { 
     let token = localStorage.getItem("token");
     const favorite_url = `${workshop_pages.baseURL}/favorite-user`;
     const api_data={favorite_id:favorite_id};
     const response_favorite = workshop_pages.postAPI_favorite(favorite_url,api_data,token);
-    workshop_pages.Console("Testing favorite API", response_favorite);
-    card.remove();
+    workshop_pages.Console("Testing favorite API", response_favorite); 
 }
 
 workshop_pages.block = async (block_id) => {
-    let card=document.getElementById(block_id)
     let token = localStorage.getItem("token");
     const block_url = `${workshop_pages.baseURL}/block-user`;
     const api_data={block_id:block_id};
     const response_block = workshop_pages.postAPI_block(block_url,api_data,token);
     workshop_pages.Console("Testing Block API", response_block);
-    card.remove();
 }
 
 workshop_pages.loadFor = (page) => {

@@ -17,10 +17,14 @@ class landingController extends Controller
     //userfeed Function return all the users on a specific condition
     public function userFeed() {
         $id = Auth::id();
+        $blocked=$this->getBlockedUsers();
+        $favorites=$this->getFavoritesId();
         $users= user::
         where('gender',Auth::user()->interested)
         ->where('id', '!=', $id)
         ->where('invisible', '=', 0)
+        ->whereNotIn('id',$blocked)
+        ->whereNotIn('id',$favorites)
         ->get();
 
        return response()->json([
@@ -38,9 +42,6 @@ class landingController extends Controller
         $user->bio = $request->bio;
         $user->dob = $request->dob;
         $user->invisible = $request->invisible;
-        $url=$id.'.'.$request->profile_pic->extension();
-        $request->profile_pic->move(public_path('images'),$url);
-        $user->profile_pic=$url;
 
         if($user->save()){
            return response()->json([
@@ -94,6 +95,18 @@ class landingController extends Controller
         return $user->favoriteBy()->get();
     }
 
+    public function getBlockedUsers() {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->blocks()->get(array('block_id'))->pluck('block_id');
+    }
+
+    public function getFavoritesId() {
+        $id = Auth::id();
+        $user = user::find($id);
+        return $user->favorites()->get(array('favorite_id'))->pluck('favorite_id');
+    }
+
     //blockUser Function to block a user
     public function blockUser(Request $request) {
         $id = Auth::id();
@@ -122,14 +135,14 @@ class landingController extends Controller
     public function getSentMessages(Request $request) {
         $id = Auth::id();
         $user = user::find($id);
-        return $user->chatSend()->get(array('message')); 
+        return $user->chatSend()->get(array('message','name')); 
     }
 
     //getRecievedMessages Function to get the recieved messages
     public function getRecievedMessages(Request $request) {
         $id = Auth::id();
         $user = user::find($id);
-        return $user->chatReciever()->get(array('message'));
+        return $user->chatReciever()->get(array('message','name'));
     }
 
     //notFound Function to route the user when unauthorized

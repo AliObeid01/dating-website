@@ -35,7 +35,7 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
     
-    public function scopefavorites(): belongsToMany
+    public function favorites(): belongsToMany
     {
         return $this->belongsToMany(user::class, 'favorites', 'user_id', 'favorite_id');
     }
@@ -55,7 +55,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->belongsToMany(user::class, 'chats', 'reciever', 'sender');
     }
 
-    public function scopeblocks(): belongsToMany
+    public function blocks(): belongsToMany
     {
         return $this->belongsToMany(user::class, 'blocks', 'user_id', 'block_id');
     }
