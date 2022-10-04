@@ -232,3 +232,22 @@ workshop_pages.postAPI_block= async (api_url,api_data,token) => {
         workshop_pages.Console("Error from Block API",  error);
     }
 }
+
+//fetch message a user api
+workshop_pages.postAPI_message = async (api_url,api_data,token) => {
+    const msg=document.getElementById('msg-sent');
+    try{
+        return await axios.post(
+            api_url,
+            api_data,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+            msg.innerHTML=response.data.data;    
+        });
+    }catch(error){
+        workshop_pages.Console("Error from Message API",  error);
+    }
+}
