@@ -334,3 +334,12 @@ workshop_pages.load_login = async () => {
     
     });
 }
+
+//load landing page script
+workshop_pages.load_landing = async () => {
+    let token = localStorage.getItem("token");
+    const feed_url = `${workshop_pages.baseURL}/feed`;
+    const response_feed = workshop_pages.getAPI_feed(feed_url,token);
+    workshop_pages.Console("Testing landing API", response_feed);
+    
+}
