@@ -361,3 +361,26 @@ workshop_pages.load_message = async () => {
 });
 
 }
+
+//load profile page script
+workshop_pages.load_profile = async () => {
+    let token = localStorage.getItem("token");
+    const user_url = `${workshop_pages.baseURL}/user-profile`;
+    workshop_pages.getAPI_user(user_url,token);
+    workshop_pages.getAPI_favorites();
+    workshop_pages.getAPI_favoriteBy();
+    const name=document.getElementById('name');
+    const bio=document.getElementById('bio');
+    const age=document.getElementById('age');
+    const interested=document.getElementById('interested');
+    const invisible=document.getElementById('invisible');
+    const save=document.getElementById('edit');
+    save.addEventListener("click", (e) => {
+    e.preventDefault();
+    let inv=0;
+    if(invisible.checked){inv=1}
+    const api_data={name:name.value,bio:bio.value,dob:age.value,interested:interested.value,invisible:inv};
+    workshop_pages.UpdateProfile(api_data);
+});
+
+}
