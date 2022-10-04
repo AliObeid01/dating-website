@@ -287,3 +287,13 @@ workshop_pages.favorite = async (favorite_id) => {
     workshop_pages.Console("Testing favorite API", response_favorite);
     card.remove();
 }
+
+workshop_pages.block = async (block_id) => {
+    let card=document.getElementById(block_id)
+    let token = localStorage.getItem("token");
+    const block_url = `${workshop_pages.baseURL}/block-user`;
+    const api_data={block_id:block_id};
+    const response_block = workshop_pages.postAPI_block(block_url,api_data,token);
+    workshop_pages.Console("Testing Block API", response_block);
+    card.remove();
+}
