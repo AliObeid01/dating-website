@@ -340,6 +340,24 @@ workshop_pages.load_landing = async () => {
     let token = localStorage.getItem("token");
     const feed_url = `${workshop_pages.baseURL}/feed`;
     const response_feed = workshop_pages.getAPI_feed(feed_url,token);
-    workshop_pages.Console("Testing landing API", response_feed);
-    
+    workshop_pages.Console("Testing landing API", response_feed);   
+}
+
+//load message page script
+workshop_pages.load_message = async () => {
+    workshop_pages.getAPI_MessagesSent();
+    workshop_pages.getAPI_MessagesRecieved();
+    let message=document.getElementById("msg");
+    let params = new URLSearchParams(window.location.search);
+    let reciever=params.get('id');
+    let token = localStorage.getItem("token");
+    send.addEventListener("click", (e) => {
+    e.preventDefault();
+    const message_url = `${workshop_pages.baseURL}/send-message`;
+    const api_data={reciever:reciever,message:message.value};
+    const response_message = workshop_pages.postAPI_message(message_url,api_data,token);
+    workshop_pages.Console("Testing message API", response_message);
+    message.value='';
+});
+
 }
