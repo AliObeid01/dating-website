@@ -251,3 +251,29 @@ workshop_pages.postAPI_message = async (api_url,api_data,token) => {
         workshop_pages.Console("Error from Message API",  error);
     }
 }
+
+//fetch update user information api
+workshop_pages.postAPI_Update = async (api_url,api_data,token) => {
+    const msg=document.getElementById('updatemsg');
+    try{
+        return await axios.post(
+            api_url,
+            api_data,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        ).then(function (response){
+            msg.innerHTML=response.data.message; 
+        });
+    }catch(error){
+        workshop_pages.Console("Error from Update API",  error);
+    }
+}
+
+workshop_pages.UpdateProfile = async (api_data) => {
+    let token = localStorage.getItem("token");
+    const register_url = `${workshop_pages.baseURL}/update-profile`;
+    const response_update = workshop_pages.postAPI_Update(register_url,api_data,token);
+    workshop_pages.Console("Testing Update API", response_update);   
+}
