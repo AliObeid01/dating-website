@@ -216,3 +216,19 @@ workshop_pages.getAPI_MessagesRecieved = async () => {
         workshop_pages.Console("Error from GET API",  error);
     }
 }
+
+//fetch block user api
+workshop_pages.postAPI_block= async (api_url,api_data,token) => {
+    try{
+        return await axios.post(
+            api_url,
+            api_data,
+            { headers:{
+                     "Authorization" : "Bearer " + token
+                }
+            }
+        )
+    }catch(error){
+        workshop_pages.Console("Error from Block API",  error);
+    }
+}
