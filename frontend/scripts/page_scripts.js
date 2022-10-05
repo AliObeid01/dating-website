@@ -1,3 +1,5 @@
+const workshop_pages = {};
+
 workshop_pages.baseURL = "http://127.0.0.1:8000/api/v1";
 
 workshop_pages.Console = (title, values, oneValue = true) => {
