@@ -1,13 +1,12 @@
 # Dating Match Website
+
 Home Page
 
-![home](https://user-images.githubusercontent.com/112481574/194330026-3480ccb2-2309-487e-aef3-c53332dbd29d.jpg)
-
+![Home](https://user-images.githubusercontent.com/112481574/194552892-41d3307c-beb4-4f82-b23b-a9cd02497443.jpg)
 
 Profile Page
 
 ![profile](https://user-images.githubusercontent.com/112481574/194330268-86344e8f-adf6-4a4c-9d86-c69586b321ba.jpg)
-
 
 Send Mesage Page 
 
